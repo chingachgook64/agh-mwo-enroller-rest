@@ -49,5 +49,36 @@ public class ParticipantRestController {
 		return new ResponseEntity<Participant>(participant, HttpStatus.CREATED);
 		
 	}
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT) 
+	public ResponseEntity<?> updateParticipantPassword(@RequestBody Participant participant) {
+		
+		if(participantService.findByLogin(participant.getLogin()) == null ) {
+			
+			return new ResponseEntity("Unable to update. A participant with login " + participant.getLogin() + " does not exist.", HttpStatus.NOT_FOUND);
+		}
+		
+		participantService.updatePassword(participant);
+		return new ResponseEntity<Participant>(participant, HttpStatus.OK);
+		
+	}
+
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<?> deleteParticipant(@PathVariable("id") String login) {
+	    Participant participant = participantService.findByLogin(login);
+	
+	if (participant == null) { 
+	return new ResponseEntity(HttpStatus.NOT_FOUND);
+	} 
+
+	participantService.delete(participant);
+	return new ResponseEntity<Participant>(HttpStatus.NO_CONTENT); 
+	}
+	
+	
+
+	
+	
 
 }
