@@ -57,10 +57,5 @@ public class MeetingService {
 		transaction.commit();
 	}
 	
-//	public void addParticipant (Participant participant) {
-//		Transaction transaction = this.session.beginTransaction();
-//		session.add;
-//		transaction.commit();
-//	}
 
 }
